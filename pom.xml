@@ -1,0 +1,137 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.semanticscience.d2s</groupId>
+	<artifactId>translator-sparql-service</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	
+	<url>https://d2s.semanticscience.org</url>
+	<description>A SPARQL endpoint with function for the NCATS Biomedical Data Translator.</description>
+	
+	<scm>
+		<url>https://github.com/vemonet/translator-sparql-service</url>
+		<connection>scm:git:git://github.com/vemonet/translator-sparql-service.git</connection>
+		<developerConnection>scm:git:git@github.com:vemonet/translator-sparql-service.git</developerConnection>
+	</scm>
+	
+    <licenses>
+      <license>
+        <name>MIT License</name>
+        <url>https://opensource.org/licenses/MIT</url>
+        <distribution>repo</distribution>
+      </license>
+    </licenses>
+	<organization>
+		<name>Institute of Data Science at Maastricht University</name>
+		<url>https://www.maastrichtuniversity.nl/ids</url>
+	</organization>
+	<developers>
+		<developer>
+			<name>Vincent Emonet</name>
+			<email>vincent.emonet@gmail.com</email>
+			<roles>
+				<role>architect</role>
+				<role>developer</role>
+			</roles>
+			<timezone>Europe/Amsterdam</timezone>
+		</developer>
+	</developers>
+
+	<properties>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.apache.jena</groupId>
+			<artifactId>jena-fuseki-embedded</artifactId>
+			<version>3.8.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.5.6</version>
+		</dependency>
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20180130</version>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- <dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-simple</artifactId>
+			<version>1.7.25</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.rdf4j</groupId>
+			<artifactId>rdf4j-runtime</artifactId>
+			<version>2.4.0</version>
+			<exclusions>
+				<!- To remove multiple SLF4J bindings warnings 
+			    <exclusion>
+			        <groupId>ch.qos.logback</groupId>
+			        <artifactId>logback-classic</artifactId>
+			    </exclusion>
+			</exclusions> 
+		</dependency>
+		<dependency>
+			<groupId>info.picocli</groupId>
+			<artifactId>picocli</artifactId>
+			<version>3.1.0</version>
+		</dependency> -->
+	</dependencies>
+	
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-shade-plugin</artifactId>
+				<configuration>
+				<shadedArtifactAttached>false</shadedArtifactAttached>
+				<transformers>
+					<transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+					<mainClass>org.semanticscience.d2s.TranslatorFuseki</mainClass>
+					</transformer>
+					<transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />
+					<transformer implementation="org.apache.maven.plugins.shade.resource.ApacheLicenseResourceTransformer" />
+					<transformer implementation="org.apache.maven.plugins.shade.resource.ApacheNoticeResourceTransformer">
+					<addHeader>false</addHeader>
+					</transformer>
+				</transformers>
+				<filters>
+					<filter>
+					<artifact>*:*</artifact>
+					<excludes>
+						<!-- Some jars are signed but shading breaks that.
+							Don't include signing files.
+						-->
+						<exclude>META-INF/*.SF</exclude>
+						<exclude>META-INF/*.DSA</exclude>
+						<exclude>META-INF/*.RSA</exclude>
+					</excludes>
+					</filter>
+				</filters>
+				</configuration>
+				<executions>
+				<execution>
+					<phase>package</phase>
+					<!--<phase /><!- - Switch off -->
+					<goals>
+					<goal>shade</goal>
+					</goals>
+				</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
