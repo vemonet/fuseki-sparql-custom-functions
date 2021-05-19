@@ -1,16 +1,10 @@
-Simple Apache Jena Fuseki embedded server to define SPARQL functions for the NCATS Translator project. 
+Simple Apache Jena Fuseki embedded server to define custom SPARQL functions easily. 
 
 ## Run
 
 ```bash
-mvn clean run
-```
-
-## Package
-
-```bash
 mvn clean package
-java -jar target/translator-sparql-service-0.0.1-SNAPSHOT.jar
+java -jar target/fuseki-sparql-custom-functions-0.0.1-SNAPSHOT.jar
 ```
 
 On Linux you can just:
@@ -19,34 +13,28 @@ On Linux you can just:
 ./restart.sh
 ```
 
-Try out:
+Try out with the URL  http://localhost:3330/translator?query=
 
-```
-http://localhost:3330/translator?query=SELECT%20*%20WHERE%20%7B%20%3Fs%20%3Chttps%3A%2F%2Fw3id.org%2Fd2s%2Ffunctions%23identify%3E%20%22holololo%22%20.%20%7D
-```
-
-<a href="http://yasgui.triply.cc/#query=PREFIX%20rdf%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E%0APREFIX%20rdfs%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0ASELECT%20*%20WHERE%20%7B%20%3Fs%20%3Chttps%3A%2F%2Fw3id.org%2Fd2s%2Ffunctions%23identify%3E%20%22holololo%22%20.%20%7D&endpoint=http%3A%2F%2Flocalhost%3A3330%2Ftranslator&requestMethod=POST&tabTitle=Query&headers=%7B%7D&contentTypeConstruct=application%2Fn-triples%2C*%2F*%3Bq%3D0.9&contentTypeSelect=application%2Fsparql-results%2Bjson%2C*%2F*%3Bq%3D0.9&outputFormat=table">Try it locally</a>
+<a href="http://yasgui.triply.cc/#query=PREFIX%20rdf%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E%0APREFIX%20rdfs%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0APREFIX%20d2s%3A%20%3Chttps%3A%2F%2Fw3id.org%2Fd2s%2Ffunctions%23%3E%0A%0ASELECT%20%3Fs%20(d2s%3Aidentify(%22tototro%22)%20as%20%3Fb)%20WHERE%20%7B%20%3Fs%20%3Fp%20%3Fo%20.%20%7D&endpoint=http%3A%2F%2Flocalhost%3A3330%2Ftranslator&requestMethod=POST&tabTitle=Query&headers=%7B%7D&contentTypeConstruct=application%2Fn-triples%2C*%2F*%3Bq%3D0.9&contentTypeSelect=application%2Fsparql-results%2Bjson%2C*%2F*%3Bq%3D0.9&outputFormat=table">Try it locally</a> with this SPARQL query:
 
 ```SPARQL
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX bv: <https://w3id.org/d2s/functions#>
+PREFIX d2s: <https://w3id.org/d2s/functions#>
 
-SELECT ?s (bv:identify("tototro") as ?b) WHERE { ?s ?p ?o . }
+SELECT ?s (d2s:identify("tototro") as ?b) WHERE { ?s ?p ?o . }
 ```
 
-
-
-## Docker 
+## With docker 
 
 Build:
 
 ```bash
-docker build -t translator-sparql-service .
+docker build -t fuseki-sparql-custom-functions .
 ```
 Run on http://localhost:3330/translator?query=
 
 ```bash
-docker run -it --rm -p 3330:3330 translator-sparql-service
+docker run -it --rm -p 3330:3330 fuseki-sparql-custom-functions
 ```
 

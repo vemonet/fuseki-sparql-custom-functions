@@ -19,10 +19,10 @@ public class FunctionIdentify extends FunctionBase1
             return nv1;
         }
 
-        String hey = nv1.toString();
-        int mid = hey.length() / 2;
-        String nay = hey.substring(0, mid);
+        String inputStr = nv1.toString();
+        int mid = inputStr.length() / 2;
+        String outputStr = inputStr.substring(0, mid);
 
-        return NodeValue.makeString(this.dataset);
+        return NodeValue.makeString(outputStr);
     }
 }

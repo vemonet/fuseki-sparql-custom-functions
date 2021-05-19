@@ -3,12 +3,12 @@ pipeline {
   stages {
     stage('checkout') {
       steps {
-        git 'https://github.com/vemonet/translator-sparql-service.git'
+        git 'https://github.com/vemonet/fuseki-sparql-custom-functions.git'
       }
     }
     stage('build') {
       steps {
-        sh 'docker build -t translator-sparql-service .'
+        sh 'docker build -t fuseki-sparql-custom-functions .'
       }
     }
   }

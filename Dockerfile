@@ -18,9 +18,9 @@ LABEL maintainer "Vincent Emonet <vincent.emonet@gmail.com>"
 
 WORKDIR /app
 
-COPY --from=build /app/target/translator-sparql-service-0.0.1-SNAPSHOT.jar /app/translator-sparql-service.jar
+COPY --from=build /app/target/fuseki-sparql-custom-functions-0.0.1-SNAPSHOT.jar /app/fuseki-sparql-custom-functions.jar
 
 ADD ./src/main/resources/init.nt /app/init.nt
 
-ENTRYPOINT ["java","-jar","/app/translator-sparql-service.jar"]
+ENTRYPOINT ["java","-jar","/app/fuseki-sparql-custom-functions.jar"]
 #CMD ["-h"]
