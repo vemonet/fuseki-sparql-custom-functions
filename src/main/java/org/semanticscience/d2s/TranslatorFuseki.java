@@ -2,9 +2,15 @@ package org.semanticscience.d2s;
 
 import org.apache.jena.fuseki.embedded.FusekiServer;
 import org.apache.jena.riot.RDFDataMgr;
-
+import org.apache.jena.sparql.function.FunctionFactory;
+import org.apache.jena.sparql.function.FunctionRegistry;
+import org.apache.jena.sparql.pfunction.PropertyFunctionRegistry;
 import org.apache.jena.query.DatasetFactory;
 import org.apache.jena.query.Dataset;
+import org.apache.jena.query.ARQ;
+
+import org.semanticscience.d2s.functions.FunctionIdentify;
+import org.semanticscience.d2s.functions.FunctionIdentifyFactory;
 
 // import org.apache.jena.atlas.logging.LogCtl;
 
@@ -28,11 +34,10 @@ public class TranslatorFuseki {
 		    .setPort(this.port)
 		    .add("/translator", fusekiDataset);
 
-		// final PropertyFunctionRegistry reg = PropertyFunctionRegistry
-		//     .chooseRegistry(ARQ.getContext());
+		final PropertyFunctionRegistry reg = PropertyFunctionRegistry
+		    .chooseRegistry(ARQ.getContext());
 
-		// FunctionRegistry.get().put("https://w3id.org/d2s/functions#identify",
-		// 	new FunctionIdentify(???));
+		FunctionRegistry.get().put("https://w3id.org/d2s/functions#identify", (FunctionFactory) new FunctionIdentifyFactory("openpredict"));
 
 		// reg.put("https://w3id.org/d2s/functions#identifyPropFct",
 		// 	    new FunctionIdentifyPropFct(???));
