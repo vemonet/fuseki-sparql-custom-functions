@@ -22,5 +22,7 @@ COPY --from=build /app/target/fuseki-sparql-custom-functions-0.0.1-SNAPSHOT.jar 
 
 ADD ./src/main/resources/init.nt /app/init.nt
 
+EXPOSE 3330
+
 ENTRYPOINT ["java","-jar","/app/fuseki-sparql-custom-functions.jar"]
 #CMD ["-h"]

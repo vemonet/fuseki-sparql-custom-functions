@@ -1,0 +1,14 @@
+version: '3'
+services:
+  translator-sparql-service-fuseki:
+    container_name: translator-sparql-service-fuseki
+    build: .
+    restart: unless-stopped
+    environment: 
+      # Use reverse nginx-proxy https://github.com/nginx-proxy/nginx-proxy
+      VIRTUAL_HOST: service.translator.137.120.31.102.nip.io
+      LETSENCRYPT_HOST: service.translator.137.120.31.102.nip.io
+      VIRTUAL_PORT: 3330
+    # ports:
+    #   - 3330:3330
+
