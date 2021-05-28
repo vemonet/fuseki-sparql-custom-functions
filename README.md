@@ -1,5 +1,7 @@
 Simple Apache Jena Fuseki embedded server to define custom SPARQL functions easily. 
 
+Try it live at https://fuseki.translator.137.120.31.102.nip.io/sparql
+
 ## Run
 
 ```bash
