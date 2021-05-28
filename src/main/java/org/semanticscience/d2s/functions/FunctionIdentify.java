@@ -30,7 +30,7 @@ public class FunctionIdentify extends FunctionBase1
             return nv1;
         }
 
-        String curieToResolve = StringUtils.strip(nv1.toString(), "\"");
+        String curieToResolve = StringUtils.strip(nv1.toString(), "\"").replace("https://identifiers.org/", "");
 
         String outputStr = curieToResolve;
 
