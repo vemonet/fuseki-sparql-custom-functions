@@ -1,7 +1,6 @@
 package org.semanticscience.d2s;
 
-import org.semanticscience.d2s.functions.FunctionIdentifyFactory;
-//import org.semanticscience.d2s.functions.FunctionIdentify;
+import org.semanticscience.d2s.functions.TranslatorLabelFunctionFactory;
 
 import org.apache.jena.fuseki.embedded.FusekiServer;
 import org.apache.jena.sparql.function.FunctionFactory;
@@ -15,7 +14,7 @@ import org.apache.jena.query.ARQ;
 // import org.apache.jena.atlas.logging.LogCtl;
 
 // https://stackoverflow.com/questions/18262164/how-do-you-use-user-defined-functions-in-fuseki/18329654
-public class TranslatorFuseki {
+public class FusekiEndpoint {
 
     int port = 3330;
     
@@ -37,7 +36,7 @@ public class TranslatorFuseki {
 		final PropertyFunctionRegistry reg = PropertyFunctionRegistry
 		    .chooseRegistry(ARQ.getContext());
 
-		FunctionRegistry.get().put("https://w3id.org/um/translator/get_label", (FunctionFactory) new FunctionIdentifyFactory("get_label"));
+		FunctionRegistry.get().put("https://w3id.org/um/translator/get_label", (FunctionFactory) new TranslatorLabelFunctionFactory("get_label"));
 
 		// reg.put("https://w3id.org/d2s/functions#identifyPropFct",
 		// 	    new FunctionIdentifyPropFct(???));
@@ -48,10 +47,10 @@ public class TranslatorFuseki {
     }
 
     public static void main(String[] args) throws Exception {
-		TranslatorFuseki translatorFuseki = new TranslatorFuseki();
+		FusekiEndpoint fusekiEndpoint = new FusekiEndpoint();
 
 		try {
-			translatorFuseki.run();
+			fusekiEndpoint.run();
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}

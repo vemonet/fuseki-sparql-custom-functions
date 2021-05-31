@@ -14,11 +14,11 @@ import org.apache.commons.lang3.StringUtils;
 // Docs: https://jena.apache.org/documentation/query/writing_functions.html
 // FunctionBase1 for function with one argument, up to FunctionBase4
 
-public class FunctionIdentify extends FunctionBase1
+public class TranslatorLabelFunction extends FunctionBase1
 {
 
     String dataset;
-    public FunctionIdentify(String dataset) {
+    public TranslatorLabelFunction(String dataset) {
         super();
 	    this.dataset = dataset;
     }

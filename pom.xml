@@ -120,7 +120,7 @@
 				<shadedArtifactAttached>false</shadedArtifactAttached>
 				<transformers>
 					<transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-					<mainClass>org.semanticscience.d2s.TranslatorFuseki</mainClass>
+					<mainClass>org.semanticscience.d2s.FusekiEndpoint</mainClass>
 					</transformer>
 					<transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />
 					<transformer implementation="org.apache.maven.plugins.shade.resource.ApacheLicenseResourceTransformer" />
